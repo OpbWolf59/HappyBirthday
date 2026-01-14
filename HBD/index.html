@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ishu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #f0e6ff 25%, #e0f7ff 50%, #e6f5f7 75%, #fff0e6 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 182, 193, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 182, 193, 0.8);
+            }
+        }
+
+        @keyframes rainbow-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes zoom-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .section {
+            animation: slide-in 0.6s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .welcome-section {
+            text-align: center;
+            gap: 40px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: bold;
+            background: linear-gradient(to right, #ec4899, #a855f7, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-shift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        .click-button {
+            padding: 24px 48px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(to right, #ec4899, #a855f7, #06b6d4);
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        .click-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-section {
+            width: 100%;
+            max-width: 42rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 20px;
+        }
+
+        .message-box {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(236, 72, 153, 0.3);
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-text {
+            text-align: center;
+            font-size: 1.125rem;
+            color: #1f2937;
+            line-height: 1.625;
+            font-weight: 500;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.5em;
+            background-color: #f472b6;
+            margin-left: 4px;
+            animation: blink 0.7s infinite;
+        }
+
+        .next-button {
+            padding: 16px 40px;
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(to right, #ec4899, #a855f7, #06b6d4);
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: pulse-glow 2s ease-in-out infinite, slide-in 0.6s ease-out;
+        }
+
+        .next-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 16px;
+            gap: 32px;
+        }
+
+        h2 {
+            font-size: clamp(1.875rem, 5vw, 3rem);
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(to right, #ec4899, #a855f7, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            color: #4b5563;
+            font-size: 1.125rem;
+            margin-bottom: 16px;
+        }
+
+        .loading {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(236, 72, 153, 0.2);
+            border-top-color: #ec4899;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .loading-text {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #4b5563;
+        }
+
+        .polaroid-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .polaroid {
+            position: relative;
+            width: 280px;
+            height: 320px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: slide-in 0.6s ease-out;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .polaroid-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .polaroid-text {
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+            font-style: italic;
+            color: #333;
+            line-height: 1.4;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            z-index: 50;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            animation: zoom-in 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px 12px 0 0;
+            display: block;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            transition: background 0.3s ease;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .modal-message {
+            padding: 32px;
+            text-align: center;
+        }
+
+        .modal-message p {
+            font-size: 1.25rem;
+            color: #1f2937;
+            line-height: 1.625;
+            font-weight: 500;
+        }
+
+        .final-message {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .final-message p:first-child {
+            font-size: 1.25rem;
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .final-message p:last-child {
+            color: #4b5563;
+            line-height: 1.625;
+        }
+
+        @media (max-width: 768px) {
+            .polaroid {
+                width: 240px;
+                height: 280px;
+            }
+
+            .polaroid-image {
+                height: 200px;
+            }
+
+            .message-box {
+                padding: 24px;
+                min-height: 250px;
+            }
+
+            .message-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Section -->
+        <div id="welcome-section" class="section welcome-section">
+            <h1>Happy Birthday Ishu!</h1>
+            <button class="click-button" onclick="startBirthday()">Click Me</button>
+        </div>
+
+        <!-- Message Section -->
+        <div id="message-section" class="section message-section hidden">
+            <div class="message-box">
+                <span class="message-text" id="typewriter-text"></span><span class="cursor" id="cursor"></span>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div id="gallery-section" class="section gallery-section hidden">
+            <h2>Photo Gallery</h2>
+            <p class="gallery-subtitle">Click on any photo to see a special message for you, Ishu</p>
+            <div id="gallery-content" class="polaroid-grid"></div>
+            <div class="final-message">
+                <p>Happy Birthday, Ishu!</p>
+                <p>Every day with you is a gift. Wishing you a year filled with joy, love, and endless happiness!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for full image view -->
+    <div id="image-modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img id="modal-image" class="modal-image" alt="Photo">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+            <div class="modal-message">
+                <p id="modal-message-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "Ishu, your smile lights up every room you walk into. You make the world a brighter place just by being you!",
+            "Your kindness and compassion towards others inspire me every single day. You're truly one of a kind!",
+            "I admire your strength and courage, Ishu. You face every challenge with such grace and determination!",
+            "The way you laugh is contagious, and it's my favorite sound in the world. Thank you for all the joy!",
+            "Ishu, your dreams are beautiful and I believe in you with all my heart. You can achieve anything!",
+            "You're not just my sister, you're my hero. I'm so incredibly proud of the person you've become!",
+            "Your creativity and passion for life teach me how to live better every single day, Ishu!",
+            "In this world full of temporary things, you are my forever. I love you more than words can express!",
+        ];
+
+        const fullBirthdayMessage = `Dear Ishu,\n\nOn your special day, I want you to know how much you mean to me. You're not just my sister—you're my best friend, my inspiration, and the light in my life. Every moment with you is precious, and I'm grateful for all the memories we've created together.\n\nHappy Birthday! Let's make today unforgettable!`;
+
+        let allPhotos = [];
+
+        function startBirthday() {
+            document.getElementById('welcome-section').classList.add('hidden');
+            document.getElementById('message-section').classList.remove('hidden');
+            startTypewriter();
+        }
+
+        function startTypewriter() {
+            const typewriterText = document.getElementById('typewriter-text');
+            const cursor = document.getElementById('cursor');
+            let currentIndex = 0;
+            
+            const interval = setInterval(() => {
+                if (currentIndex < fullBirthdayMessage.length) {
+                    typewriterText.textContent = fullBirthdayMessage.slice(0, currentIndex + 1);
+                    currentIndex++;
+                } else {
+                    clearInterval(interval);
+                    cursor.style.display = 'none';
+                    showNextButton();
+                }
+            }, 40);
+        }
+
+        function showNextButton() {
+            const messageSection = document.getElementById('message-section');
+            const nextButton = document.createElement('button');
+            nextButton.className = 'next-button';
+            nextButton.textContent = 'Next';
+            nextButton.onclick = showGallery;
+            messageSection.appendChild(nextButton);
+        }
+
+        function showGallery() {
+            document.getElementById('message-section').classList.add('hidden');
+            document.getElementById('gallery-section').classList.remove('hidden');
+            loadPhotos();
+        }
+
+        function loadPhotos() {
+            const galleryContent = document.getElementById('gallery-content');
+            galleryContent.innerHTML = '<div class="loading"><div class="spinner"></div><p class="loading-text">Loading precious memories...</p></div>';
+
+            setTimeout(() => {
+                fetchAllPhotosFromFolder();
+            }, 800);
+        }
+
+        function fetchAllPhotosFromFolder() {
+            // Get all files from pic folder
+            const galleryContent = document.getElementById('gallery-content');
+            
+            // Try to load images dynamically
+            const imageNames = [];
+            let successCount = 0;
+            let attemptCount = 0;
+            const maxAttempts = 20;
+
+            // Try filenames from 1 to 20
+            for (let i = 1; i <= maxAttempts; i++) {
+                attemptLoad(i);
+            }
+
+            function attemptLoad(index) {
+                attemptCount++;
+                const extensions = ['.jpg', '.jpeg', '.png'];
+                let extIndex = 0;
+
+                function tryExt() {
+                    if (extIndex >= extensions.length) {
+                        if (attemptCount === maxAttempts && successCount === 0) {
+                            // No images found - show message
+                            galleryContent.innerHTML = '<p style="color: #4b5563; font-size: 1.125rem; text-align: center;">Please add images to the "pic" folder to see them here.</p>';
+                        }
+                        return;
+                    }
+
+                    const imgPath = `pic/image${index}${extensions[extIndex]}`;
+                    const img = new Image();
+
+                    img.onload = () => {
+                        successCount++;
+                        imageNames.push(imgPath);
+                        addPhotoToGallery(imgPath, messages[imageNames.length - 1] || messages[0], successCount - 1);
+                        
+                        // Stop after finding 6-8 images
+                        if (successCount >= 8) {
+                            console.log(`[v0] Loaded ${successCount} images successfully`);
+                        }
+                    };
+
+                    img.onerror = () => {
+                        extIndex++;
+                        tryExt();
+                    };
+
+                    img.src = imgPath;
+                }
+
+                tryExt();
+            }
+        }
+
+        function addPhotoToGallery(imagePath, message, index) {
+            const galleryContent = document.getElementById('gallery-content');
+            
+            // Remove loading indicator on first successful image
+            if (index === 0) {
+                galleryContent.innerHTML = '';
+            }
+
+            const rotation = Math.random() * 6 - 3;
+            
+            const polaroidDiv = document.createElement('div');
+            polaroidDiv.className = 'polaroid';
+            polaroidDiv.style.transform = `rotate(${rotation}deg)`;
+            polaroidDiv.style.animationDelay = `${index * 0.1}s`;
+            
+            const img = document.createElement('img');
+            img.className = 'polaroid-image';
+            img.src = imagePath;
+            img.alt = 'Ishu photo';
+            
+            const textDiv = document.createElement('div');
+            textDiv.className = 'polaroid-text';
+            textDiv.textContent = message;
+            
+            polaroidDiv.appendChild(img);
+            polaroidDiv.appendChild(textDiv);
+            
+            polaroidDiv.onclick = () => openModal(imagePath, message);
+            
+            galleryContent.appendChild(polaroidDiv);
+        }
+
+        function openModal(imageUrl, message) {
+            const modal = document.getElementById('image-modal');
+            document.getElementById('modal-image').src = imageUrl;
+            document.getElementById('modal-message-text').textContent = message;
+            modal.classList.add('open');
+        }
+
+        function closeModal(event) {
+            // Only close if clicking on the modal background itself
+            if (event && event.target.id !== 'image-modal') return;
+            
+            const modal = document.getElementById('image-modal');
+            modal.classList.remove('open');
+        }
+    </script>
+</body>
+</html>
